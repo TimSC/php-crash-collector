@@ -1,0 +1,14 @@
+<?php
+
+define("DB_PATH","crashlogs.db");
+define("DB_SECRET","Rr2u!0Q2Sugj");
+
+class LogDB extends SQLite3
+{
+    function __construct()
+    {
+        $this->open(realpath(dirname(__FILE__)).'/'.DB_PATH);
+    }
+}
+
+?>
