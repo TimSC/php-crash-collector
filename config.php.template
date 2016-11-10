@@ -2,6 +2,7 @@
 
 define("DB_PATH","crashlogs.db");
 define("DB_SECRET","Rr2u!0Q2Sugj");
+define("ADMIN_PASSWORD","4I4!2z9g^1y^");
 
 class LogDB extends SQLite3
 {

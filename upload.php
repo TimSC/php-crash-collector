@@ -10,7 +10,7 @@ if ($dataFrags[0] != hash('sha256', DB_SECRET.$dataFrags[1]))
 $decData = json_decode($dataFrags[1]);
 
 $db = new LogDB();
-$db->exec('CREATE TABLE IF NOT EXISTS logs (uuid STRING, program STRING, timestamp, STRING, data STRING);');
+$db->exec('CREATE TABLE IF NOT EXISTS logs (uuid STRING, program STRING, times STRING, data STRING);');
 
 $db->exec('CREATE INDEX IF NOT EXISTS logs_uuid_index ON logs (uuid);');
 
@@ -27,10 +27,10 @@ while ($row = $results->fetchArray()) {
 	}
 }
 
-$stmt = $db->prepare("INSERT INTO logs (uuid, program, timestamp, data) VALUES (:uuid, :program, :timestamp, :data)");
+$stmt = $db->prepare("INSERT INTO logs (uuid, program, times, data) VALUES (:uuid, :program, :times, :data)");
 $stmt->bindValue(':uuid', $decData->{'uuid'});
 $stmt->bindValue(':program', $decData->{'program'});
-$stmt->bindValue(':timestamp', $decData->{'timestamp'});
+$stmt->bindValue(':times', strtotime($decData->{'timestamp'}));
 $stmt->bindValue(':data', $dataFrags[1]);
 $result = $stmt->execute();
 
